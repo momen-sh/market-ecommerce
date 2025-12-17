@@ -1,0 +1,39 @@
+####################################
+# ASP.NET Core / .NET
+####################################
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+####################################
+# Visual Studio
+####################################
+.vs/
+
+####################################
+# Angular / Node
+####################################
+node_modules/
+dist/
+.angular/cache/
+.angular/
+
+####################################
+# Environment / Secrets
+####################################
+appsettings.Development.json
+.env
+
+####################################
+# OS files
+####################################
+.DS_Store
+Thumbs.db
+
+
+**/appsettings.Development
+market.backend/appsettings.Development
+

@@ -1,0 +1,10 @@
+<div class="categories-scroll">
+  <button
+    *ngFor="let cat of categories"
+    class="category-btn"
+    [class.active]="selected === cat"
+    (click)="onSelect(cat)"
+  >
+    {{ displayCategory(cat) }}
+  </button>
+</div>
