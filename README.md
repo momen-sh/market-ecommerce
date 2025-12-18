@@ -1,4 +1,4 @@
-# 🛒 Market Clean (E-Commerce)
+# 🛒 Market (E-Commerce)
 
 Full-stack e-commerce web application built with ASP.NET Core Web API and Angular.
 
