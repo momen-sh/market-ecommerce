@@ -38,4 +38,4 @@ ng serve
 ## 🎥 Demo Video
 Short demo showcasing the e-commerce application (user flow + admin panel).
 
-▶ Watch: https://drive.google.com/file/d/XXXXXXXX/view
+▶ Watch: https://drive.google.com/file/d/1r41pGTHeBbciS2WzOVXb3z0VLF3hO9ZY/view?usp=sharing
