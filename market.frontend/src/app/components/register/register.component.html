@@ -1,0 +1,78 @@
+<div class="container d-flex justify-content-center align-items-center register-container">
+    <div class="card register-card">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-2">{{ 'auth.registerHeading' | translate }}</h3>
+            <p class="text-center text-muted small mb-4">{{ 'auth.registerSub' | translate }}</p>
+
+            <form (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">{{ 'auth.firstName' | translate }}</label>
+                        <input type="text" class="form-control" id="firstName" [placeholder]="'auth.firstName' | translate"
+                            [(ngModel)]="firstName" name="firstName" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">{{ 'auth.lastName' | translate }}</label>
+                        <input type="text" class="form-control" id="lastName" [placeholder]="'auth.lastName' | translate" [(ngModel)]="lastName"
+                            name="lastName" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">{{ 'auth.email' | translate }}</label>
+                        <input type="email" class="form-control" id="email" placeholder="your@email.com"
+                            [(ngModel)]="email" name="email" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="confirmEmail" class="form-label">{{ 'auth.confirmEmail' | translate }}</label>
+                        <input type="email" class="form-control" id="confirmEmail" placeholder="your@email.com"
+                            [(ngModel)]="confirmEmail" name="confirmEmail" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">{{ 'auth.password' | translate }}</label>
+                        <input type="password" class="form-control" id="password" placeholder="Min 8 characters"
+                            [(ngModel)]="password" name="password" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="confirmPassword" class="form-label">{{ 'auth.confirmPassword' | translate }}</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password"
+                            [(ngModel)]="confirmPassword" name="confirmPassword" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="age" class="form-label">{{ 'account.age' | translate }}</label>
+                        <input type="number" class="form-control" id="age" placeholder="18" [(ngModel)]="age" name="age"
+                            min="18" max="120" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="gender" class="form-label">{{ 'account.gender' | translate }}</label>
+                        <select class="form-select" id="gender" [(ngModel)]="gender" name="gender" required>
+                            <option value="">{{ 'auth.selectGender' | translate }}</option>
+                            <option *ngFor="let g of genderOptions" [value]="g">{{ g }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                    {{ errorMessage }}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    {{ 'auth.createAccount' | translate }}
+                </button>
+            </form>
+
+            <div class="text-center">
+                <small class="text-muted">{{ 'auth.haveAccount' | translate }}
+                    <a (click)="goToLogin()" class="register-link">{{ 'auth.signInLink' | translate }}</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

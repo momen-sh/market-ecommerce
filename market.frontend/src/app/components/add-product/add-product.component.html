@@ -1,0 +1,90 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="mb-3">{{ 'admin.addProduct' | translate }}</h3>
+
+          <div *ngIf="!isAdmin" class="alert alert-danger">
+            {{ 'admin.notAllowed' | translate }}
+          </div>
+
+          <form *ngIf="isAdmin" (ngSubmit)="submit()">
+            <div class="mb-3">
+              <label class="form-label" for="name">{{ 'admin.name' | translate }}</label>
+              <input
+                id="name"
+                class="form-control"
+                [(ngModel)]="form.name"
+                name="name"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="price">{{ 'admin.price' | translate }}</label>
+              <input
+                id="price"
+                type="number"
+                class="form-control"
+                [(ngModel)]="form.price"
+                name="price"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="description">{{ 'admin.description' | translate }}</label>
+              <textarea
+                id="description"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="form.description"
+                name="description"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="imageFile">{{ 'admin.imageFile' | translate }}</label>
+              <input
+                id="imageFile"
+                type="file"
+                class="form-control"
+                name="imageFile"
+                accept="image/*"
+                (change)="onFileChange($event)"
+                required
+              />
+              <small class="text-muted" *ngIf="imageFile">{{ imageFile.name }}</small>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="category">{{ 'admin.category' | translate }}</label>
+              <select
+                id="category"
+                class="form-select"
+                [(ngModel)]="form.category"
+                name="category"
+                required
+              >
+                <option value="" disabled>{{ 'admin.selectCategory' | translate }}</option>
+                <option *ngFor="let c of categories" [value]="c">
+                  {{ ('categories.' + c) | translate }}
+                </option>
+              </select>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+            <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="loading">
+              {{ loading ? ('admin.saving' | translate) : ('admin.save' | translate) }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
