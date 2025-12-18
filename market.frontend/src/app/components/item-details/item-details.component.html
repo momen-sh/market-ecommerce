@@ -1,0 +1,53 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="onClose()"></div>
+
+<div class="modal-container" *ngIf="isOpen">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <button class="close-btn" (click)="onClose()" aria-label="Close">×</button>
+
+    <ng-container *ngIf="item">
+      <div class="modal-grid">
+
+        <img *ngIf="item.image" [src]="item.image" [alt]="item.name" class="item-image" />
+
+        <div class="info-grid">
+
+          <div class="info-left">
+            <h2 class="title">{{ item.name }}</h2>
+
+            <p class="category" *ngIf="item.category">
+              Category: <strong>{{ item.category }}</strong>
+            </p>
+
+            <p class="price">${{ item.price.toFixed(2) }}</p>
+
+            <p class="description" *ngIf="item.description">
+              {{ item.description }}
+            </p>
+          </div>
+
+          <div class="info-right">
+            <div class="actions">
+
+              <div class="qty-control">
+                <button class="btn btn-sm btn-outline-secondary" (click)="decrement()"
+                  [disabled]="quantity <= 1">−</button>
+
+                <input type="number" class="qty-input" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange($event)"
+                  min="1" aria-label="Quantity" />
+                <button class="btn btn-sm btn-outline-secondary" (click)="increment()">+</button>
+              </div>
+
+              <button class="btn btn-primary" (click)="onAddToCart()">
+                Add to Cart
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>
