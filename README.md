@@ -34,3 +34,8 @@ Full-stack e-commerce web application built with ASP.NET Core Web API and Angula
 cd market.frontend/my-project-ui
 npm install
 ng serve
+
+## 🎥 Demo Video
+Short demo showcasing the e-commerce application (user flow + admin panel).
+
+▶ Watch: https://drive.google.com/file/d/XXXXXXXX/view
