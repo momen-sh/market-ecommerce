@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { SearchService } from '../../services/search.service';
 import { ProductService } from '../../services/product.service';
@@ -21,20 +22,27 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   query = '';
 
   private searchSub?: Subscription;
+  private routeSub?: Subscription;
 
   constructor(
     private cartService: CartService,
     private searchService: SearchService,
     private productService: ProductService,
     private itemDetailsService: ItemDetailsService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.categories = this.categoriesService.getCategories();
-    this.productService.getAll().subscribe(list => {
-      this.filteredProducts = list;
+
+    this.routeSub = this.route.paramMap.subscribe(params => {
+      const category = params.get('category');
+      this.selectedCategory = category ?? Categories.All;
+      this.onSearch();
     });
+
     this.searchSub = this.searchService.query$.subscribe(q => {
       this.query = q || '';
       this.onSearch();
@@ -48,7 +56,12 @@ export class MainScreenComponent implements OnInit, OnDestroy {
 
   selectCategory(category: Categories | string): void {
     this.selectedCategory = category;
-    this.onSearch();
+    if (category === Categories.All || category === 'All') {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.router.navigate(['/category', String(category)]);
   }
 
   addToCart(p: Product): void {
@@ -61,5 +74,6 @@ export class MainScreenComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.searchSub?.unsubscribe();
+    this.routeSub?.unsubscribe();
   }
 }
