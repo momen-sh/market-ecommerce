@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" (click)="goHome()">Market</a>
+
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
+            [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation" (click)="toggle()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div [ngClass]="{ 'collapse navbar-collapse': true, show: !isCollapsed }" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-sm-0">
+                <li class="nav-item" *ngFor="let link of links">
+                    <a class="nav-link" [class.active]="isActive(link.route)" (click)="navigate(link.route)">
+                        <ng-container *ngIf="link.labelKey; else plainLabel">
+                          {{ link.labelKey | translate }}
+                        </ng-container>
+                        <ng-template #plainLabel>{{ link.label }}</ng-template>
+                    </a>
+                </li>
+            </ul>
+
+            <form class="d-flex align-items-center" role="search" (submit)="$event.preventDefault()">
+
+                <button class="btn btn-outline-primary position-relative cart-button" type="button" aria-label="Cart"
+                    (click)="goCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span *ngIf="cartCount > 0"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ cartCount }}
+                        <span class="visually-hidden">items in cart</span>
+                    </span>
+                </button>
+
+                <button class="btn btn-sm btn-secondary ms-3 lang-toggle" type="button" (click)="toggleLang()">
+                  {{ 'navbar.langToggle' | translate }}
+                </button>
+
+                <a *ngIf="isAdmin" class="btn btn-primary btn-sm ms-3" (click)="goAddProduct()">
+                  {{ 'navbar.addProduct' | translate }}
+                </a>
+
+                <ng-container *ngIf="user; else loggedOut">
+                  <div class="nav-user ms-3">
+                    <button class="btn btn-outline-danger btn-sm border bg-white" (click)="logout()">
+                      {{ 'navbar.logout' | translate }}
+                    </button>
+                  </div>
+                </ng-container>
+                <ng-template #loggedOut>
+                  <a class="btn btn-sm btn-primary ms-3" (click)="login()">{{ 'navbar.login' | translate }}</a>
+                </ng-template>
+            </form>
+        </div>
+    </div>
+</nav>
